@@ -15,7 +15,7 @@ public class UserTest {
 
 		@Override
 		public void run() {
-			Service service = new ServiceImpl();
+			Service service = ServiceImpl.getInstance();
 			Double amount = 100.0;
 			amount = service.taxCalculation(amount);
 			service.registerSale(SaleCounter.counter++, amount);
@@ -28,7 +28,7 @@ public class UserTest {
 		User u = new User();
 		u.run();
 
-		Service service = new ServiceImpl();
+		Service service = ServiceImpl.getInstance();
 		System.out.println(service.dailyReport(service.now()));
 
 	}
@@ -42,7 +42,7 @@ public class UserTest {
 
 		Thread.sleep(USERS * 1000);
 
-		Service service = new ServiceImpl(); // this is so ugly
+		Service service = ServiceImpl.getInstance(); // this is so ugly
 		System.out.println(service.dailyReport(service.now()));
 
 	}

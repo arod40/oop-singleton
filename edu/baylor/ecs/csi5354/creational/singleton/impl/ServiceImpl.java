@@ -8,9 +8,18 @@ import edu.baylor.ecs.csi5354.creational.singleton.Service;
 
 public class ServiceImpl implements Service {
 
+	private static ServiceImpl instance;
+
 	Logger log = new LoggerImpl(ServiceImpl.class);
 
-	public ServiceImpl() {
+	public static ServiceImpl getInstance(){
+		if (instance == null){
+			instance = new ServiceImpl();
+		}
+		return instance;
+	}
+
+	protected ServiceImpl() {
 		sleep(2000);
 		log.log("initiated");
 	}
