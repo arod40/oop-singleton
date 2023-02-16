@@ -10,7 +10,7 @@ public class ServiceImpl implements Service {
 
 	private static ServiceImpl instance;
 
-	Logger log = new LoggerImpl(ServiceImpl.class);
+	Logger log = LoggerImpl.getInstance(ServiceImpl.class);
 
 	public static ServiceImpl getInstance(){
 		if (instance == null){
