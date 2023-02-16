@@ -16,9 +16,10 @@ public class UserTest {
 		@Override
 		public void run() {
 			Service service = ServiceImpl.getInstance();
+			SaleCounter counter = SaleCounter.getInstance();
 			Double amount = 100.0;
 			amount = service.taxCalculation(amount);
-			service.registerSale(SaleCounter.counter++, amount);
+			service.registerSale(counter.increaseCounter(), amount);
 		}
 
 	}

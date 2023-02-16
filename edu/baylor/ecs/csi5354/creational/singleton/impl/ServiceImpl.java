@@ -2,6 +2,8 @@ package edu.baylor.ecs.csi5354.creational.singleton.impl;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import edu.baylor.ecs.csi5354.creational.singleton.Logger;
 import edu.baylor.ecs.csi5354.creational.singleton.Service;
@@ -10,11 +12,17 @@ public class ServiceImpl implements Service {
 
 	private static ServiceImpl instance;
 
+	private static Lock lock = new ReentrantLock();
+
 	Logger log = LoggerImpl.getInstance(ServiceImpl.class);
 
 	public static ServiceImpl getInstance(){
 		if (instance == null){
-			instance = new ServiceImpl();
+			lock.lock();
+			if (instance == null) {
+				instance = new ServiceImpl();
+			}
+			lock.unlock();
 		}
 		return instance;
 	}
