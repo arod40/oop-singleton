@@ -41,14 +41,14 @@ public class ServiceImpl implements Service {
 	public void registerSale(int id, double amount) {
 		// issue registration
 		sleep(50);
-		Register.instance.add(now(), id, amount); // it could be better
+		Register.getInstance().add(now(), id, amount); // it could be better
 		log.log("registerSale " + id);
 	}
 
 	public double dailyReport(Date day) {
 		sleep(1000);
 		log.log("dailyReport");
-		return Register.instance.total(now()); // it could be better
+		return Register.getInstance().total(now()); // it could be better
 	}
 
 	private void sleep(int i) {

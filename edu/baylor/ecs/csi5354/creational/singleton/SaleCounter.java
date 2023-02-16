@@ -1,9 +1,8 @@
 package edu.baylor.ecs.csi5354.creational.singleton;
 
-import edu.baylor.ecs.csi5354.creational.singleton.impl.ServiceImpl;
 
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.*;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Helper class
