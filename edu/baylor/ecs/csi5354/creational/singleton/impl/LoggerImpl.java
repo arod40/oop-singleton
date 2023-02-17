@@ -15,6 +15,12 @@ public class LoggerImpl implements Logger {
 	private Class<?> c;
 	private List<String> files = new ArrayList<>();
 
+	/**
+	 *
+	 * Applies Singleton on the parameter c: always returns the same instance for a given class c.
+	 * @param c The class for which the caller wants to obtain the Logger.
+	 * @return An instance of the LoggerImpl.
+	 */
 	public static LoggerImpl getInstance(Class<?> c){
 		if (!instances.containsKey(c)){
 			instances.put(c, new LoggerImpl(c));

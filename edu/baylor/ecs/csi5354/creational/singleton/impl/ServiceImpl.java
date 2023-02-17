@@ -16,13 +16,23 @@ public class ServiceImpl implements Service {
 
 	Logger log = LoggerImpl.getInstance(ServiceImpl.class);
 
+	/**
+	 *
+	 * Applies Singleton and always returns the same instance. The method uses locks so that creation is thread safe.
+	 * @return An instance of the ServiceImpl.
+	 *
+	 */
 	public static ServiceImpl getInstance(){
 		if (instance == null){
 			lock.lock();
-			if (instance == null) {
-				instance = new ServiceImpl();
+			try{
+				if (instance == null) {
+					instance = new ServiceImpl();
+				}
 			}
-			lock.unlock();
+			finally{
+				lock.unlock();
+			}
 		}
 		return instance;
 	}

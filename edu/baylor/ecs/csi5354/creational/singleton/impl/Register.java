@@ -16,32 +16,49 @@ class Register {
 
 	protected Register(){}
 
+	/**
+	 *
+	 * Applies Singleton and always returns the same instance. The method uses locks so that creation is thread safe.
+	 * @return An instance of the Register.
+	 *
+	 */
 	public static Register getInstance(){
 		if (instance == null){
 			lock.lock();
-			if (instance == null) {
-				instance = new Register();
+			try{
+				if (instance == null) {
+					instance = new Register();
+				}
 			}
-			lock.unlock();
+			finally {
+				lock.unlock();
+			}
 		}
 		return instance;
 	}
 
-
+	/**
+	 *
+	 * Registers a sale. The method uses locks so that state modification is thread safe.
+	 */
 	public void add(Date date, int id, Double amount) {
 		lock.lock();
-		if (!register.containsKey(date)) {
-			register.put(date, amount);
-		} else {
-			register.put(date, register.get(date) + amount);
-		}
+		try {
+			if (!register.containsKey(date)) {
+				register.put(date, amount);
+			} else {
+				register.put(date, register.get(date) + amount);
+			}
 
-		if (!registerDetails.containsKey(date)) {
-			Map<Integer, Double> registration = new HashMap<>();
-			registerDetails.put(date, registration);
+			if (!registerDetails.containsKey(date)) {
+				Map<Integer, Double> registration = new HashMap<>();
+				registerDetails.put(date, registration);
+			}
+			registerDetails.get(date).put(id, amount);
 		}
-		registerDetails.get(date).put(id, amount);
-		lock.unlock();
+		finally {
+			lock.unlock();
+		}
 	}
 
 	public Double total(Date date) {
